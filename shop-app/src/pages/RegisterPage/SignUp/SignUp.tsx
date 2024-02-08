@@ -4,14 +4,14 @@ import { useState } from "react";
 import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 import { app } from "../../../firebase";
 import { useAppDispatch } from "../../../hooks/redux";
-import { setUser } from "../../../store/userSlice/useSlice";
+import { setUser } from "../../../store/user/useSlice";
 
 
 const SignUp = () => {
     const navigate = useNavigate();
     const [firebaseError, setFirebaseError] = useState("");
     const dispatch = useAppDispatch();
-    const handleSignupAndLogin = (email: string, password: string) => {
+    const handleSignUpAndLogin = (email: string, password: string) => {
         const auth = getAuth(app);
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
@@ -29,7 +29,7 @@ const SignUp = () => {
   return (
     <Form
         title={"가입하기"}
-        getDataForm={handleSignupAndLogin}
+        getDataForm={handleSignUpAndLogin}
         firebaseError={firebaseError}
     />
   )
