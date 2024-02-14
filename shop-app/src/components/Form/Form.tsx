@@ -46,9 +46,11 @@ const Form: React.FC<FormProps> = ({title, getDataForm, firebaseError}) => {
             placeholder="E-mail"
             {...register("email", userEmail)}
             />
+            {errors?.email &&
             <div>
                 <span className={styles.form_error}>{errors?.email?.message}</span>
             </div>
+            }
         </div>
 
         <div>
@@ -57,12 +59,16 @@ const Form: React.FC<FormProps> = ({title, getDataForm, firebaseError}) => {
             placeholder="password"
             {...register("password", userPassword)}
             />
+            {errors?.password &&
             <div>
                 <span className={styles.form_error}>{errors?.password?.message}</span>
             </div>
+            }
         </div>
         <button type="submit">{title}</button>
+        {firebaseError &&
         <span className={styles.form_error}>{firebaseError}</span>
+        }
     </form>
   )
 }

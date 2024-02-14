@@ -5,6 +5,7 @@ import { fetchProduct } from "../../store/products/productSlice";
 
 import styles from "./Detail.module.scss";
 import Loader from "../../components/Loader/Loader";
+import { addToCart } from "../../store/cart/cartSlice";
 
 const DetailPage = () => {
     const { id } = useParams();
@@ -12,8 +13,12 @@ const DetailPage = () => {
     const dispatch = useAppDispatch();
 
     const { product, isLoading } = useAppSelector((state) => state.product);
-    const { products } = useAppSelector((state) => state.products);
+    const { products } = useAppSelector((state) => state.cart);
     const productMatching = products.some((item) => item.id === product.id);
+
+    const addItemToCart = () => {
+        dispatch(addToCart(product));
+    }
 
     useEffect(() => {
         dispatch(fetchProduct(productId));
@@ -36,7 +41,7 @@ const DetailPage = () => {
                 <h4> $ {product.price}</h4>
                 <p>{product.description}</p>
                 <div>
-                    <button disabled={productMatching}>
+                    <button disabled={productMatching} onClick={() => !productMatching && addItemToCart()}>
                         {productMatching ? "장바구니에 담긴 상품" : "장바구니에 담기"}
                     </button>
 
