@@ -5,6 +5,8 @@ import RegisterPage from './pages/RegisterPage/RegisterPage'
 import HomePage from './pages/HomePage/HomePage'
 import DetailPage from './pages/DetailPage/DetailPage'
 import CartPage from './pages/CartPage/CartPage'
+import OrderPage from './pages/OrderPage/OrderPage'
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage'
 
 
 function App() {
@@ -18,6 +20,8 @@ function App() {
           <Route path='login' element={<LoginPage/>}/>
           <Route path='register' element={<RegisterPage/>}/>
           <Route path='cart' element={<CartPage/>}/>
+          <Route path='order' element={<OrderPage/>}/>
+          <Route path='*' element={<NotFoundPage/>}/>
         </Route>
       </Routes>
     </BrowserRouter>

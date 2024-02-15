@@ -9,7 +9,7 @@ export const postOrder = createAsyncThunk(
             await axios.post("https://65cc705edd519126b83e75f2.mockapi.io/orders",order);
             thunkApi.dispatch(sendOrder());
         } catch (err) {
-            return err;
+            return thunkApi.rejectWithValue(err);
         }
     }
 )
