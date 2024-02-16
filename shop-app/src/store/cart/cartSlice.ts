@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { IProduct } from "../products/products-type";
 import axios from "axios";
+import { json } from "react-router-dom";
 
 export const postOrder = createAsyncThunk(
     "cart/postOrder",
@@ -21,9 +22,13 @@ type cartStateType = {
 }
 
 const initialState:cartStateType = {
-    products: [],
+    products: localStorage.getItem("cartProducts")
+    ? JSON.parse(localStorage.getItem("cartProducts") || "")
+    : [],
     totalPrice: 0,
-    userId: "",
+    userId: localStorage.getItem("userId")
+    ? JSON.parse(localStorage.getItem("userId") || "")
+    : "",
 }
 
 export const cartSlice = createSlice({
@@ -33,13 +38,13 @@ export const cartSlice = createSlice({
         setUserId:(state, action) => {
             state.userId = action.payload;
             
-            
+            localStorage.setItem("userId", JSON.stringify(state.userId));
         },
 
         removeUserId:(state) => {
             state.userId = "";
 
-           
+            localStorage.setItem("userId", JSON.stringify(state.userId));
         },
 
         addToCart:(state, action) => {
@@ -49,13 +54,13 @@ export const cartSlice = createSlice({
                 total: action.payload.price,
             });
 
-            
+            localStorage.setItem("cartProducts",JSON.stringify(state.products));
         },
 
         deleteFromCart: (state, action) => {
             state.products = state.products.filter((item) => item.id !== action.payload);
 
-            
+            localStorage.setItem("cartProducts",JSON.stringify(state.products));
         },
 
         incrementProduct: (state, action) => {
@@ -67,7 +72,7 @@ export const cartSlice = createSlice({
             }
             : item
             )
-           
+            localStorage.setItem("cartProducts",JSON.stringify(state.products));
         },
 
         decrementProduct: (state, action) => {
@@ -79,7 +84,7 @@ export const cartSlice = createSlice({
             }
             : item
             )
-           
+            localStorage.setItem("cartProducts",JSON.stringify(state.products));
         },
 
         getTotalPrice: (state) => {
@@ -91,6 +96,7 @@ export const cartSlice = createSlice({
 
         sendOrder: (state) => {
             state.products = [];
+            localStorage.setItem("cartProducts",JSON.stringify(state.products));
         }
     },
 })
