@@ -1,6 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { Tag } from "../../types/tag";
-import { v4 } from "uuid";
 import { toast } from "react-toastify";
 
 interface TagState {
@@ -8,11 +7,7 @@ interface TagState {
 }
 
 const initialState: TagState = {
-    tagsList: [
-        {tag: "learnings", id: v4()},
-        {tag: "work", id: v4()},
-        {tag: "quotes", id: v4()},
-    ],
+    tagsList: [],
 }
 
 const tagSlice = createSlice({

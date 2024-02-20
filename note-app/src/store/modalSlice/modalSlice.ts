@@ -27,7 +27,7 @@ const modalSlice = createSlice({
             if(type === "add") {
                 state.viewAddTagsModal = view;
             }else {
-                state.viewAddTagsModal = view;
+                state.viewEditTagsModal = view;
             }
         },
         toggleFiltersModal: (state, action) => {

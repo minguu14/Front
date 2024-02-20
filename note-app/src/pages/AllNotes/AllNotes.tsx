@@ -4,16 +4,34 @@ import { ButtonOutline, Container, EmptyMsgBox } from "../../styles/styles"
 import { Box, InputBox, TopBox } from "./AllNotes.styles";
 import { toggleFiltersModal } from "../../store/modalSlice/modalSlice";
 import getAllNotes from "../../utils/getAllNotes";
+import FilterModal from "../../components/Modal/FilterModal/FilterModal";
 
 
 const AllNotes = () => {
     const dispatch = useAppDispatch();
     const { mainNotes } = useAppSelector((state) => state.notesList);
+    const { viewFiltersModal } = useAppSelector((state) => state.modal);
     const [filter, setFilter] = useState("");
     const [searchInput, setSearchInput] = useState("");
 
+    const filterHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setFilter(e.target.value);
+    }
+
+    const clearHandler = () => {
+        setFilter("");
+    }
+
   return (
     <Container>
+        {/* 필터 모달 */}
+        {viewFiltersModal && (
+            <FilterModal
+            handleFilter={filterHandler}
+            handleClear={clearHandler}
+            filter={filter}
+            />
+        )}
         {/* 노트 부분 */}
         {mainNotes.length === 0 ? (
             <EmptyMsgBox>노트가 없습니다.</EmptyMsgBox>
@@ -29,7 +47,7 @@ const AllNotes = () => {
                     />
                     </InputBox>
 
-                    <div className="cotes__filter-btn">
+                    <div className="notes__filter-btn">
                         <ButtonOutline
                         onClick={() => dispatch(toggleFiltersModal(true))}
                         className="nav__btn"
