@@ -20,12 +20,14 @@ const NavBar = () => {
   return (
     <StyledNav>
       <div className="nav_menu">
+        {/* 메뉴 클릭 시 토글 메뉴 활성화. */}
         <FiMenu onClick={() => dispatch(toggleMenu(true))}/>
       </div>
-
       <Container>
-        <div className="nav__page-title">{getStandardName(state)}</div>
-
+        {/* 상단 타이틀 */}
+        <div className="nav__page-title">{state ? getStandardName(state) : "Notes"}</div>
+      {/* Trash와 Archive 상태가 아닐 때, 노트 생성 버튼 활성화. */}
+      {/* 버튼 클릭 시 노트 생성 모달 활성화 */}
         {state !== "Trash" && state !== "Archive" && (
             <ButtonFill 
             onClick={() => dispatch(toggleCreateNoteModal(true))}

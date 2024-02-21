@@ -20,6 +20,7 @@ const Sidebar = () => {
     const { tagsList } = useAppSelector((state) => state.tag);
     
   return (
+    // isOpen 상태에 따라서 openmenu 설정.
     <Container openmenu={isOpen ? "open" : ""}>
         <MainBox openmenu={isOpen ? "open" : ""}>
         <StyledLogo>

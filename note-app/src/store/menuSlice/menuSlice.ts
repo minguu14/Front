@@ -13,6 +13,7 @@ const menuSlice = createSlice({
     initialState,
     reducers: {
         toggleMenu:(state, action) => {
+            // payload에 따라 활성화.
             state.isOpen = action.payload;
         }
     },

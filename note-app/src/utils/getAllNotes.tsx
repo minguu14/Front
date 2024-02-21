@@ -4,9 +4,11 @@ import { Note } from "../types/note";
 
 const filteredNotes = (notes: Note[], filter: string) => {
 
+  // 우선순위 별로 분류 된 노트들을 각각 가져옴.
   const lowPriority = notes.filter(({ priority }) => priority === "low");
   const highPriority = notes.filter(({ priority }) => priority === "high");
 
+  // 체크 된 필터 별로 정렬하기.
   if (filter === "low") {
       return [...lowPriority, ...highPriority];
   } else if (filter === "high") {
@@ -29,7 +31,7 @@ const filteredNotes = (notes: Note[], filter: string) => {
 
 
 const getAllNotes = (mainNotes: Note[], filter: string) => {
-
+  // pinned 상태와 normal 상태의 note들을 각각 가져옴.
   const pinned = mainNotes.filter(({ isPinned }) => isPinned);
   const normal = mainNotes.filter(({ isPinned }) => !isPinned);
 
@@ -41,6 +43,7 @@ const getAllNotes = (mainNotes: Note[], filter: string) => {
               All Notes
           </div>
           <NotesContainer>
+            {/* normal 상태의 카드들만 보여줌 */}
               {filteredNotes(normal, filter).map((note) =>  (
                   <NoteCard key={note.id} note={note} type="notes" />
               ))}
@@ -57,6 +60,7 @@ const getAllNotes = (mainNotes: Note[], filter: string) => {
             Pinned Notes <span>({pinned.length})</span>
         </div>
         <NotesContainer>
+          {/* Pinned된 note들만 보여줌 */}
             {filteredNotes(pinned, filter).map((note) => (
               <NoteCard key={note.id} note={note} type="notes"/>
             ))}
@@ -69,6 +73,7 @@ const getAllNotes = (mainNotes: Note[], filter: string) => {
     return (
       <>
         <div>
+          {/* pinned 상태와 normal 상태 둘 다 보여줌 */}
           <div className="allNotes__notes-type">
             Pinned Notes <span>({pinned.length})</span>
           </div>

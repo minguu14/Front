@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import notes from "../../notesData";
 import { Note } from "../../types/note";
 
 interface NoteState {
@@ -11,7 +10,7 @@ interface NoteState {
 
 
 const initialState: NoteState = {
-    mainNotes: [...notes],
+    mainNotes: [],
     archiveNotes: [],
     trashNotes: [],
     editNote: null
@@ -29,12 +28,13 @@ const notesListSlice = createSlice({
     initialState,
     reducers: {
         setMainNotes: (state, { payload }) => {
-            // 해당 note 수정
+            // mainNotes에 동일한 id의 note를 찾음
+            // 동일한 아이디가 있다면, mainNotes를 순회하여 해당 note로 대체
             if (state.mainNotes.find(({ id }) => id === payload.id)) {
                 state.mainNotes = state.mainNotes.map((note) =>
                     note.id === payload.id ? payload : note)
             }
-            // note를 새롭게 생성
+            // 동일한 아이디가 없다면, payload 추가.
             else {
                 state.mainNotes.push(payload);
             }

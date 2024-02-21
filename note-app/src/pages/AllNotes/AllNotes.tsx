@@ -24,7 +24,7 @@ const AllNotes = () => {
 
   return (
     <Container>
-        {/* 필터 모달 */}
+        {/* 필터 모달 상태에 따라 활성화 및 비활성화 */}
         {viewFiltersModal && (
             <FilterModal
             handleFilter={filterHandler}
@@ -32,7 +32,7 @@ const AllNotes = () => {
             filter={filter}
             />
         )}
-        {/* 노트 부분 */}
+        {/* 메인노트 부분 */}
         {mainNotes.length === 0 ? (
             <EmptyMsgBox>노트가 없습니다.</EmptyMsgBox>
         ) : (
