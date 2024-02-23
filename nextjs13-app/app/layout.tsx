@@ -19,9 +19,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <nav>
+          {/* app에 있는 page로 감. */}
           <Link href={"/"}>
             <p>Home</p>
           </Link>
+          {/* posts 폴더에 있는 페이지로 이동 */}
           <Link href={"/posts"}>
             <p>Post</p>
           </Link>
