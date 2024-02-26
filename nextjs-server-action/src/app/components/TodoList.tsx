@@ -8,6 +8,7 @@ export type Todo = {
     id: number
 }
 
+// db.json에서 todo 데이터 가져오기.
 async function fetchTodos() {
     try {
         const res = await fetch("http://localhost:3001/todos");
@@ -20,6 +21,7 @@ async function fetchTodos() {
     }
 }
 
+// 가져온 데이터로 UI 보여주기.
 const TodoList = async () => {
     const todos = await fetchTodos();
     let content;

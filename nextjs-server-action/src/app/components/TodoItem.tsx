@@ -1,6 +1,8 @@
 import React from 'react'
 import { Todo } from './TodoList'
 import Link from 'next/link'
+import { deleteTodo } from '@/lib/actions'
+import CheckBox from './CheckBox'
 
 const TodoItem = (todo: Todo) => {
   return (
@@ -11,8 +13,13 @@ const TodoItem = (todo: Todo) => {
             </Link>
         </label>
         <div className='flex items-center gap-4'>
-            CheckBox
-            <button>X</button>
+            <CheckBox todo={todo}/>
+            <button
+            formAction={async () => {
+              "use server";
+              await deleteTodo(todo);
+            }}
+            >X</button>
         </div>
     </form>
   )
