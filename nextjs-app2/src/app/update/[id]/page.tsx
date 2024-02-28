@@ -52,7 +52,7 @@ const page = () => {
             <textarea name="body" placeholder="body" value={body} onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setBody(e.target.value)}></textarea>
         </p>
         <p>
-            <input type="submit" value="create" />
+            <input type="submit" value="update" />
         </p>
     </form>
   )
